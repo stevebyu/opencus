@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+	<title>cus - chatbot update system</title>
+	<link rel="stylesheet" href="./styles.css" />
+	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+':35729/livereload.js?snipver=2"></' + 'script>')</script>
+	<script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+</head>
+
+<body>
+<div id="app">
+	<div class="help">?</div>
+	<br />
+	<div class="left reports red">
+		<div class="left inappropriateNum"><span class="big-numbers">{{ inappropriateNum }}</span></div>
+		<div class="left inappropriateDesc">inappropriate responses left</div>
+	</div>
+	<div class="left reports green">
+		<div class="left correctedNum"><span class="big-numbers">{{ correctedNum }}</span><br />corrected responses<br /></div>
+		<div class="left correctedDesc">
+			{{ correctedToday}} today<br />
+			{{ correctedWeek }} this week<br />
+			{{ correctedMonth }} this month<br />
+		</div>
+	</div>
+	<br class="clear" />
+	<hr />
+	<div id="workareas">
+		<div id="workarea1" ref="workarea11">
+			<div class="chats" v-for="(toCorrect, index) in onesToCorrect">
+				<span :key="toCorrect.id" @click="selectChat(index)">
+					<div :class="{ sas: !toCorrect.selected, selected: toCorrect.selected }" v-for="corr in toCorrect.chats">{{ corr }}<br /><br /></div>
+				</span>
+			</div>
+		</div>
+		<div id="workarea2" :style="{ height: workarea1Height }">
+			<div class="select">select correct responses<br />
+				<ul>
+					<li v-for="possibility in correctPossibilities">{{ possibility }}</li>
+				</ul>
+				<input type="text" value="custom response" /><br />
+				<input type="submit" value="save" />
+			</div>
+		</div>
+	</div>
+</div>
+    <!-- Import App -->
+    <script src="./4prototype.js"></script>
+
+    <!-- Mount App -->
+    <script>
+      const mountedApp = app.mount('#app')
+    </script>
+</body>
+</html>

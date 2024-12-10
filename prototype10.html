@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+	<title>cus - chatbot update system</title>
+	<!--<link rel="stylesheet" href="./styles.css" />-->
+	<style>
+		#version {
+			color: gray;
+			font-size: 15px;
+		}
+		#pageTitle {
+			font-size: 30px;
+			float: right;
+			width: 200px;
+		}
+		div {
+			/*border: 1px solid black;*/
+		}
+		#context {
+			border: 1px solid black;
+			width: 490px;
+		}
+		.left {
+			float: left;
+		}
+		.clickable_a {
+			cursor: pointer;
+			margin: 20px;
+			padding-top: 20px;
+			padding-bottom: 20px;
+			padding-left: 20px;
+		}
+		.clickable_b {
+			cursor: pointer;
+			margin: 20px;
+			padding-top: 20px;
+			padding-bottom: 20px;
+			padding-left: 20px;
+		}
+		.clickable_c {
+			cursor: pointer;
+			margin: 20px;
+			padding-top: 20px;
+			padding-bottom: 20px;
+			padding-left: 20px;
+		}
+		.reg_a {
+			background-color: #28a745;
+		}
+		.reg_b {
+			background-color: #28a745;
+		}
+		.reg_c {
+			background-color: #28a745;
+		}
+		.done_a {
+			width: 400px;
+			background-color: #000000;
+			color: white;
+		}
+		.done_b {
+			width: 400px;
+			background-color: #000000;
+			color: white;
+		}
+		.done_c {
+			width: 400px;
+			background-color: #000000;
+			color: white;
+		}
+		.selectCorrect_a {
+			background-color: #000000;
+			color: white;
+		}
+		.selectCorrect_b {
+			background-color: #000000;
+			color: white;
+		}		
+		.selectCorrect_c {
+			background-color: #000000;
+			color: white;
+		}
+		.centered {
+			text-align: center;
+		}
+		.sel {
+			background-color: lightpink;
+		}
+		.boxed_a {
+			list-style-type: none;
+			border: 1px solid black;
+			margin: 20px;
+			padding-top: 20px;
+			padding-bottom: 20px;
+			padding-left: 20px;
+		}
+		.boxed_b {
+			list-style-type: none;
+			border: 1px solid black;
+			margin: 20px;
+			padding-top: 20px;
+			padding-bottom: 20px;
+			padding-left: 20px;
+		}
+		.boxed_c {
+			list-style-type: none;
+			border: 1px solid black;
+			margin: 20px;
+			padding-top: 20px;
+			padding-bottom: 20px;
+			padding-left: 20px;
+		}
+		.spaced {
+			margin-top: 10px;
+		}
+		.reports {
+			margin-right: 15px;
+			border: 1px solid black;
+		}
+		.big-numbers {
+			font-size: 70pt;
+		}
+		.red {
+			color: red;
+		}
+		.green {
+			color: green;
+		}
+		.inappropriateNum {
+			width: 50%;
+			text-align: center;
+		}
+		.inappropriateDesc {
+			width: 40%;
+			margin-top: 30px;
+			margin-left: 10px;
+		}
+		.correctedNum {
+			text-align: center;
+		}
+		.correctedDesc {
+			margin-top: 30px;
+			margin-left: 10px;
+		}
+		.help {
+			float: right;
+		}
+		.clear {
+			clear: both;
+		}
+		.workarea1_a {
+			min-height: 222px;
+			clear: both;
+		}
+		.workarea1_b {
+			min-height: 222px;
+			clear: both;
+		}
+		.workarea1_c {
+			min-height: 222px;
+			clear: both;
+		}
+		.workarea2_a {
+			float: left;
+			padding-left: 20px;
+			background-color: #ffffff;
+			min-height: 400px;
+		}
+		.workarea2_b {
+			float: left;
+			padding-left: 20px;
+			background-color: #ffffff;
+			min-height: 400px;
+		}
+		.workarea2_c {
+			float: left;
+			padding-left: 20px;
+			background-color: #ffffff;
+			min-height: 400px;
+		}
+		.chats_a {
+			width: 300px;
+		}
+		.chats_b {
+			width: 300px;
+		}
+		.chats_c {
+			width: 300px;
+		}
+		.selected {
+			border: 0px;
+			background-color: #28a745;
+		}
+		.sas {
+			border-right: 1px solid black;
+			background-color: #dc3545;
+		}
+		.select {
+			float: right;
+		}
+		#customResponseButton {
+			--breakpoint-xxl: 1600px;
+			--home-primary: #002e5d;
+			--home-secondary: #0062b8;
+			--home-primary-focus: rgba(0,46,93,0.25098039215686274);
+			--byu-headline-font: HCo Ringside Narrow SSm;
+			--byu-body-font: Public Sans;
+			--background-gray: #fafafa;
+			--blue: #007bff;
+			--indigo: #6610f2;
+			--purple: #6f42c1;
+			--pink: #e83e8c;
+			--red: #dc3545;
+			--orange: #fd7e14;
+			--yellow: #ffc107;
+			--green: #28a745;
+			--teal: #20c997;
+			--cyan: #17a2b8;
+			--white: #fff;
+			--gray: #6c757d;
+			--gray-dark: #343a40;
+			--primary: #007bff;
+			--secondary: #6c757d;
+			--success: #28a745;
+			--info: #17a2b8;
+			--warning: #ffc107;
+			--danger: #dc3545;
+			--light: #f8f9fa;
+			--dark: #343a40;
+			--breakpoint-xs: 0;
+			--breakpoint-sm: 576px;
+			--breakpoint-md: 768px;
+			--breakpoint-lg: 992px;
+			--breakpoint-xl: 1200px;
+			--font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+			--font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+			--md-theme-default-primary: #448aff;
+			--md-theme-default-accent: #ff5252;
+			--md-theme-default-theme: light;
+			-webkit-tap-highlight-color: transparent;
+			-webkit-text-size-adjust: 100%;
+			-webkit-font-smoothing: antialiased;
+			box-sizing: inherit;
+			font: inherit;
+			margin: 0;
+			overflow: visible;
+			text-transform: none;
+			transition: .15s ease-in-out!important;
+			background-color: #002e5d!important;
+			color: #fff!important;
+			border-color: #002e5d!important;
+			-webkit-appearance: button;
+			display: inline-block;
+			font-weight: 400;
+			text-align: center;
+			vertical-align: middle;
+			user-select: none;
+			border: 1px solid transparent;
+			padding: .375rem .75rem;
+			font-size: 1rem;
+			line-height: 1.5;
+			border-radius: .25rem;
+			cursor: pointer;
+		}
+		#customResponseInput {
+			--breakpoint-xxl: 1600px;
+			--home-primary: #002e5d;
+			--home-secondary: #0062b8;
+			--home-primary-focus: rgba(0,46,93,0.25098039215686274);
+			--byu-headline-font: HCo Ringside Narrow SSm;
+			--byu-body-font: Public Sans;
+			--background-gray: #fafafa;
+			--blue: #007bff;
+			--indigo: #6610f2;
+			--purple: #6f42c1;
+			--pink: #e83e8c;
+			--red: #dc3545;
+			--orange: #fd7e14;
+			--yellow: #ffc107;
+			--green: #28a745;
+			--teal: #20c997;
+			--cyan: #17a2b8;
+			--white: #fff;
+			--gray: #6c757d;
+			--gray-dark: #343a40;
+			--primary: #007bff;
+			--secondary: #6c757d;
+			--success: #28a745;
+			--info: #17a2b8;
+			--warning: #ffc107;
+			--danger: #dc3545;
+			--light: #f8f9fa;
+			--dark: #343a40;
+			--breakpoint-xs: 0;
+			--breakpoint-sm: 576px;
+			--breakpoint-md: 768px;
+			--breakpoint-lg: 992px;
+			--breakpoint-xl: 1200px;
+			--font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+			--font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+			--md-theme-default-primary: #448aff;
+			--md-theme-default-accent: #ff5252;
+			--md-theme-default-theme: light;
+			-webkit-tap-highlight-color: transparent;
+			-webkit-text-size-adjust: 100%;
+			-webkit-font-smoothing: antialiased;
+			pointer-events: auto;
+			word-wrap: break-word;
+			box-sizing: inherit;
+			overflow: visible;
+			font: inherit;
+			margin: 0;
+			display: block;
+			width: 290px;
+			height: calc(1.5em + .75rem + 2px);
+			padding: .375rem .75rem;
+			font-size: 1rem;
+			font-weight: 400;
+			line-height: 1.5;
+			color: #495057;
+			background-color: #fff;
+			background-clip: padding-box;
+			border: 1px solid #ced4da;
+			border-radius: .25rem;
+			transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+		}
+	</style>
+	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+':35729/livereload.js?snipver=2"></' + 'script>')</script>
+	<script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+</head>
+
+<body>
+<div id="app">
+	<div class="help">?</div>
+	<br />
+	<div class="left reports red">
+		<div class="left inappropriateNum"><span class="big-numbers">{{ inappropriateNumber }}</span></div>
+		<div class="left inappropriateDesc">inappropriate responses left</div>
+	</div>
+	<div class="left reports green">
+		<div class="left correctedNum"><span class="big-numbers">{{ correctedNum }}</span><br />corrected responses<br /></div>
+		<div class="left correctedDesc">
+			{{ correctedToday}} today<br />
+			{{ correctedWeek }} this week<br />
+			{{ correctedMonth }} this month<br />
+		</div>
+	</div>
+	<div id="pageTitle">CUS - Chatbot Update System <span id="version">{{ prototypeVersion }}</span></div>
+	<br class="clear" />
+	<div id="context">
+		<select v-model="selectedContext" @change="selectContext()">
+			<option v-for="option in contexts" v-bind:value="option.dayInfo">
+				{{ option.dayInfo }}
+			</option>
+		</select>
+		<br />
+		<br />
+		{{ selectedContextText }}
+	</div>
+	<br class="clear" />
+	<hr />
+	<div id="workareas">
+		<div :class="{
+			workarea1_a: prototypeVersion === 'a',
+			workarea1_b: prototypeVersion === 'b',
+			workarea1_c: prototypeVersion === 'c',
+		}" ref="workarea11">
+			<div :class="{
+				done_a: prototypeVersion === 'a',
+				done_b: prototypeVersion === 'b',
+				done_c: prototypeVersion === 'c',
+				centered: true
+			}">{{ doneMessage }}<br /><br /></div>
+			<div :class="{
+				chats_a: prototypeVersion === 'a',
+				chats_b: prototypeVersion === 'b',
+				chats_c: prototypeVersion === 'c',
+			}" v-for="(toCorrect, index) in pendingOnesToCorrect">
+				<span :class="{
+					clickable_a: prototypeVersion === 'a',
+					clickable_b: prototypeVersion === 'b',
+					clickable_c: prototypeVersion === 'c',
+				}" :key="toCorrect.id" @click="selectChat(index)">
+					<div :class="{ sas: !toCorrect.selected, selected: toCorrect.selected }" v-for="corr in toCorrect.chats">{{ corr }}<br /><br /></div>
+				</span>
+			</div>
+		</div>
+		<div :class="{
+			workarea2_a: prototypeVersion === 'a',
+			workarea2_b: prototypeVersion === 'b',
+			workarea2_c: prototypeVersion === 'c',
+		}" :style="{ height: workarea1Height }">
+			<div class="select"><div :class="{
+				selectCorrect_a: prototypeVersion === 'a',
+				selectCorrect_b: prototypeVersion === 'b',
+				selectCorrect_c: prototypeVersion === 'c',
+				centered: true,
+			}">set correct response<br /><br /></div>
+				<ul>
+					<li :class="{
+						clickable_a: true && prototypeVersion === 'a',
+						clickable_b: true && prototypeVersion === 'a',
+						clickable_c: true && prototypeVersion === 'a',
+						boxed_a: true && prototypeVersion === 'a',
+						boxed_b: true && prototypeVersion === 'b',
+						boxed_c: true && prototypeVersion === 'c',
+						reg_a: !possibility.selected && prototypeVersion === 'a',
+						reg_b: !possibility.selected && prototypeVersion === 'b',
+						reg_c: !possibility.selected && prototypeVersion === 'c',
+						sel: possibility.selected
+					}" v-for="(possibility, index) in correctPossibilities" @click.prevent="selectCorrection(index)">
+						<span class="spaced">{{ possibility.text }}</span>
+					</li>
+				</ul>
+				<input id="customResponseInput" type="text" @focus="setCustomResponseFocus(true)" @blur="setCustomResponseFocus(false)" placeholder="custom response" v-model="customResponse"  /><br /><br />
+				<button id="customResponseButton" @keypress.prevent="" @click.prevent="correctTheChat()">save</button>
+			</div>
+		</div>
+	</div>
+	<br class="clear" />
+	<hr />
+	<div id="correctionMessage">{{ correctionMessage }}</div>
+	<div id="random">{{ customResponse }}</div>
+</div>
+
+<!--<script src="./main.js"></script>-->
+<script>
+const app = Vue.createApp({
+	created() {
+		window.addEventListener('keypress', this.onKeyPress);
+		const queryString = window.location.search;
+		if (queryString !== '') {
+			const urlParams = new URLSearchParams(queryString);
+			const version = urlParams.get('v');
+			this.prototypeVersion = version;
+		}
+		console.log(this.prototypeVersion);
+		this.pendingOnesToCorrect.push(this.onesToCorrect[0]);
+	},
+	beforeUnmount() {
+		window.removeEventListener('keypress', this.onKeyPress);
+	},
+	data() {
+		return {
+			prototypeVersion: '',
+			responsesHeight: 4,
+			correctionPair: {},
+			customResponseFocused: false,
+			customResponse: '',
+			doneMessage: 'pending response',
+			correctionMessage: '',
+			inappropriateNum: 0,
+			correctedNum: 150,
+			correctedToday: 5,
+			correctedWeek: 16,
+			correctedMonth: 37,
+			selectedId: 0,
+			selectedCorrection: 0,
+			selectedContext: 0,
+			selectedContextText: '--nothing yet--',
+			contexts: [
+					{dayInfo: 'Cybermatics DAY 1 (Kimberly):', text: 'Hey there Junior, welcome to Cybermatics! I sent you a welcome email with some important details, so please read through that if you haven’t already. Look through the tasks listed on the left side of the screen to get an idea of what you’ll be doing today. We’re excited to have you on the team! Shoot us a hello when you get on!'},
+					{dayInfo: 'Cybermatics DAY 2 (Kimberly):', text: 'Perfect. Refer to the documentation if you need any help with SQL injection. To start out, just see if you can get in and retrieve the database name.  If that works, reply with the database name so we can all poke around a bit.'},
+					{dayInfo: 'Cybermatics DAY 3 (Kimberly):', text: 'Morning! Nice work with the SQL injection yesterday! From that, we got some information from the database--including some password hashes, which is just the encoded version of a password. First, we need you to crack some passwords. Do you remember what hashing algorithm they used?'},
+					{dayInfo: 'Cybermatics DAY 4 (Kimberly):', text: 'Well, today we\'ll start with SSHing into their server. It\'s running Linux. Start by trying the username/password pairs we got from riptech’s website yesterday-- I bet one of them will work on their server since people reuse passwords so often. Reply when you get in.'},
+					{dayInfo: 'Sam-day4', text: 'Sam: Hey, I hear you were able to find the credentials for Kosmo. You\'re the boss! Maybe you should be running things around here. Fortunately, failing to find Kosmo\'s credentials wasn\'t all I\'ve been doing. I did a little more snooping on Kosmo and I think I found his blog! It\'s just an IP address, no URL, pretty edgy. http://128.187.111.13:8282/. Maybe you should login with Kosmo\'s credentials and reply back to this message with anything suspicious you find. I\'d love to see anything you are able to find.'},
+					{dayInfo: 'Cybermatics DAY 5: Kimerly', text: 'Hey everyone, I came in this morning and checked the internet history from last night. It looks like someone went to the IP of a private blog. Did any of you try to get any information from this site? http://128.187.111.13:8282/'},
+			],
+			pendingOnesToCorrect: [],
+			onesToCorrect: [
+				{
+					id: 1,
+					selected: false,
+					chats: [
+						"Student: that's out of scope",
+						"Chatbot: I don't understand"
+					]
+				},
+				{
+					id: 2,
+					selected: false,
+					chats: [
+						"Student: Lorem ipsum",
+						"Chatbot: What?",
+						"Student: Bacon ipsum?",
+						"Chatbot: I'm sorry, could you try again?"
+					]
+				},
+				{
+					id: 3,
+					selected: false,
+					chats: [
+						"Student: Goldy",
+						"Chatbot: Could you please say that again?"
+					]
+				},
+				{
+					id: 4,
+					selected: false,
+					chats: [
+						"Student: I don't think I can.",
+						"Chatbot: Could you please say that again?"
+					]
+				},
+				{
+					id: 5,
+					selected: false,
+					chats: [
+						"Student: Wait, how do I do it?",
+						"Chatbot: I don't understand."
+					]
+				},
+			],
+			correctPossibilities: [
+				{id: 1, selected: false, text: "Okay, that's just as well."},
+				{id: 2, selected: false, text: "Great job!"},
+				{id: 3, selected: false, text: "Try looking for hidden files."},
+				{id: 4, selected: false, text: "I still think it's a good idea."},
+				{id: 5, selected: false, text: "I think Jennifer would agree we should try."},
+			],
+		}
+	},
+	methods: {
+		selectChat(index) {
+			var shouldSelect = false;
+			this.selectedId = 0;
+			if (this.onesToCorrect[index] !== undefined) {
+				if (!this.onesToCorrect[index].selected) {
+					shouldSelect = true;
+				}
+				for (x in this.onesToCorrect) {
+					this.onesToCorrect[x].selected = false;
+				}
+				if (shouldSelect) {
+					this.onesToCorrect[index].selected = true;
+					this.selectedId = this.onesToCorrect[index].id;
+				}
+			}
+		},
+		selectCorrection(index) {
+			this.selectedCorrection = 0;
+			var shouldSelect = false;
+			if (!this.correctPossibilities[index].selected) {
+				shouldSelect = true;
+			}
+			for (x in this.correctPossibilities) {
+				this.correctPossibilities[x].selected = false;
+			}
+			if (shouldSelect) {
+				this.correctPossibilities[index].selected = true;
+				this.selectedCorrection = this.correctPossibilities[index].id;
+			}
+		},
+		correctTheChat() {
+			if (this.selectedId > 0 && (this.customResponse !== '' || this.selectedCorrection > 0)) {
+				var theCorrection = this.selectedCorrection;
+				this.correctionMessage = 'corrected!';
+				this.onesToCorrect[x]
+				var newOnesToCorrect = [];
+				for (x in this.onesToCorrect) {
+					if (this.onesToCorrect[x].id !== this.selectedId) {
+						newOnesToCorrect.push(this.onesToCorrect[x]);
+					}
+				}
+				var highestId = 0;
+				var allPossibilities = [];
+				for (x in this.correctPossibilities) {
+					this.correctPossibilities[x].selected = false;
+					allPossibilities.push(this.correctPossibilities[x]);
+					highestId = this.correctPossibilities[x].id;
+				}
+console.log(highestId);
+				this.selectedCorrection = 0;
+				this.selectedId = 0;
+				if (this.customResponse !== '') {
+					//this.responsesHeight += 160;
+					var newResponse = {};
+					newResponse.selected = false;
+					newResponse.id = highestId + 1;
+					newResponse.text = this.customResponse;
+					allPossibilities.push(newResponse);
+
+				}
+				this.onesToCorrect = newOnesToCorrect;
+				this.pendingOnesToCorrect = [];
+				if (this.onesToCorrect[0] !== undefined) {
+					this.pendingOnesToCorrect.push(this.onesToCorrect[0]);
+				}
+				this.correctPossibilities = allPossibilities;
+				this.inappropriateNum--;
+				this.correctedNum++;
+				this.correctedToday++;
+				this.correctedWeek++;
+				this.correctedMonth++;
+				console.log('corrected');
+				this.correctionPair.toCorrect = this.selectedId;
+				this.correctionPair.selectedCorrection = this.customResponse !== '' ? this.customResponse : theCorrection;
+				console.log(this.correctionPair);
+				this.customResponse = '';
+				
+			}
+		},
+		onKeyPress(event) {
+			if (event.key == 'Enter') {
+				console.log('enter pressed');
+				this.correctTheChat();
+			} else if (this.customResponseFocused) {
+				return;
+			} else {
+				okKeysOnesToCorrect = ['1','2','3','4','5'];
+				if (okKeysOnesToCorrect.includes(event.key)) {
+					var doSelect = parseInt(event.key) - 1;
+					this.selectChat(doSelect);
+				}
+				var allTheLetters = 'abcdefghijklmnopqrstuvwxyz';
+				var okKeysPossibleCorrections = allTheLetters.split('');
+				if (okKeysPossibleCorrections.includes(event.key)) {
+					var mappedLettersToIndex = {};
+					for (x in this.correctPossibilities) {
+						mappedLettersToIndex[okKeysPossibleCorrections[x]] = x;
+					}
+					if (mappedLettersToIndex[event.key] !== undefined) {
+						this.selectCorrection(mappedLettersToIndex[event.key]);
+					}
+				}
+			}
+		},
+		saveCustomResponse() {
+			this.customResponse = event.target.value;
+		},
+		setCustomResponseFocus(focused) {
+			this.customResponseFocused = focused;
+		},
+		selectContext() {
+			for (x in this.contexts) {
+				if (this.selectedContext === this.contexts[x].dayInfo) {
+					this.selectedContextText = this.contexts[x].text;
+				}
+			}
+		},
+	},
+	computed: {
+		inappropriateNumber() {
+			return this.onesToCorrect.length;
+		},
+		workarea1Height() {
+			var height = this.responsesHeight;
+			var maxNumberOfElements = Math.max(this.onesToCorrect.length, this.correctPossibilities.length);
+			console.log(maxNumberOfElements);
+			height += 236 + (maxNumberOfElements * 60);
+console.log(height);
+			if (height < 400) height = 400;
+console.log(height);
+			return height + 'px';
+		},
+	}
+})
+</script>
+
+<script>
+//a = one column of correct responses below, b = two columns, c = popup
+	const mountedApp = app.mount('#app')
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+	div {
+		/*border: 1px solid black;*/
+	}
+	.left {
+		float: left;
+	}
+	.clickable {
+		cursor: pointer;
+	}
+	.reg {
+
+	}
+	.sel {
+		background-color: lightpink;
+	}
+	.boxed {
+		border: 1px solid black;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		padding-left: 20px;
+	}
+	.spaced {
+		margin-top: 10px;
+	}
+	.reports {
+		margin-right: 15px;
+		border: 1px solid black;
+	}
+	.big-numbers {
+		font-size: 70pt;
+	}
+	.red {
+		color: red;
+	}
+	.green {
+		color: green;
+	}
+	.inappropriateNum {
+		width: 50%;
+		text-align: center;
+	}
+	.inappropriateDesc {
+		width: 40%;
+		margin-top: 30px;
+		margin-left: 10px;
+	}
+	.correctedNum {
+		text-align: center;
+	}
+	.correctedDesc {
+		margin-top: 30px;
+		margin-left: 10px;
+	}
+	.help {
+		float: right;
+	}
+	.clear {
+		clear: both;
+	}
+	#workarea1 {
+		float: left;
+		border-left: 1px solid black;
+		min-height: 222px;
+	}
+	#workarea2 {
+		float: left;
+		border-top: 1px solid black;
+		border-right: 1px solid black;
+		border-bottom: 1px solid black;
+		padding-left: 20px;
+		background-color: #28a745;
+		min-height: 400px;
+	}
+	.chats {
+		width: 300px;
+		border-top: 1px solid black;
+		border-left: 1px solid black;
+		border-bottom: 1px solid black;
+	}
+	.selected {
+		border: 0px;
+		background-color: #28a745;
+	}
+	.sas {
+		border-right: 1px solid black;
+		background-color: #dc3545;
+	}
+	.select {
+		float: right;
+	}
